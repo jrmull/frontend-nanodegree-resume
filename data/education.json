@@ -1,0 +1,26 @@
+{
+  "education": {
+    "schools": [{
+      "name": "Shippensburg University",
+      "location": "Shippensburg, PA",
+      "degree": "Bachelor of Science",
+      "majors": ["Computer Science"],
+      "dates": 2001,
+      "url": "https://web.cs.ship.edu/"
+    }, {
+      "name": "Chambersburg Area Senior High School",
+      "location": "Chambersburg, PA",
+      "degree": "Degree",
+      "majors": ["College Preparatory"],
+      "dates": 1997,
+      "url": "http://www.chambersburg.k12.pa.us/education/school/school.php?sectionid=11"
+    }],
+    "onlineCourses": [{
+      "title": "Engineering Software as a Service",
+      "school": "edX",
+      "date": 2014,
+      "url": "https://www.edx.org/course/engineering-software-service-saas-part-1-uc-berkeleyx-cs169-1x"
+    }],
+    "display": function() {}
+  }
+}

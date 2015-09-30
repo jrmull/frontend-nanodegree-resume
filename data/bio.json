@@ -1,0 +1,17 @@
+{
+  "bio": {
+    "name": "Jason Mull",
+    "role": "Systems Architect",
+    "contacts": {
+      "mobile": "717-469-5499",
+      "email": "jrmull@gmail.com",
+      "github": "https://github.com/jrmull",
+      "twitter": "https://twitter.com/jrmull",
+      "location": "Chambersburg, PA"
+    },
+    "welcomeMessage": "It's a me, Jason. Hello!",
+    "skills": ["CSS", "HTML", "JavaScript"],
+    "biopic": "https://google.com",
+    "display": {}
+  }
+}
