@@ -5,8 +5,8 @@
       "title": "Systems Architect",
       "location": "Chambersburg, PA",
       "dates": "2001/06/04 - Present",
-      "description": "Comunity Credit Union helping its members achieve their American Dream."
+      "description": "Oversee and implement core system itegrations. Help & guide junior developers to meet their potential. Design, develop, deploy."
     }],
-    "display": function()
+    "display": {}
   }
 }

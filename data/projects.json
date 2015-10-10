@@ -4,17 +4,24 @@
       "title": "Episys Symitar API",
       "dates": "2015/03/01 - ongoing",
       "description": "Design and implement a RESTful API that exposes core Symitar system functionality via secure HTTP. Technologies: Node.js, Express, Redis, Symitar SymConnect",
-      "images": ["", ""]
+      "images": [
+        "http://www.creditunions.com/assets/1/22/LogoMainDimension/Symitar_Logo_Primary.jpg"
+      ]
     }, {
       "title": "TILA-RESPA Integrated Disclosure",
       "dates": "2015/04/01 - 2015/10/02",
-      "description": "Implemented this Federal Government compliance measure to consolidate documents dealing with closed-end credit transactions secured by real property. Technologies: HTML/CSS/AJAX, AngularJS (incl Angular Material), Node.js (with Express/iisnode), Adobe PDF, Symitar PowerOn",
-      "images": ["", ""]
+      "description": "Implemented this Federal Government compliance measure to consolidate documents dealing with closed-end credit transactions secured by real property. Technologies: HTML/CSS/AJAX, AngularJS (incl Angular Material), Node.js (with Express/iisnode), Adobe Acrobat Pro, Symitar PowerOn",
+      "images": [
+        "http://www.consumerfinance.gov/wp-content/themes/cfpb_nemo/_/img/logo.svg"
+      ]
     }, {
       "title": "Electronic Lien Titling Conversion",
       "dates": "2015/03/01 - 2015/10/23",
       "description": "Aided in switching Electronic Lien Titling providers by streamlining the process and reducing manual tasks. Technologies: HTML/CSS/AJAX, Bootstrap, Node.js (with Express/iisnode), MSSQL",
-      "images": ["", ""]
+      "images": [
+        "http://www.etitlelien.com/wp-content/uploads/2013/08/logo1.png"
+      ]
     }],
-    "display": function() {}
+    "display": {}
   }
+}
