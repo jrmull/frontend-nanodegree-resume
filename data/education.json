@@ -11,16 +11,22 @@
       "name": "Chambersburg Area Senior High School",
       "location": "Chambersburg, PA",
       "degree": "Degree",
-      "majors": ["College Preparatory"],
+      "majors": ["College Preparatory",
+        "Lost inside the dreams, of teen machines"
+      ],
       "dates": 1997,
       "url": "http://www.chambersburg.k12.pa.us/education/school/school.php?sectionid=11"
     }],
     "onlineCourses": [{
+      "title": "Various Courses (see linked 'Report Card')",
+      "school": "Code School",
+      "date": 2015,
+      "url": "https://www.codeschool.com/users/jrmull"
+    }, {
       "title": "Engineering Software as a Service",
       "school": "edX",
       "date": 2014,
       "url": "https://www.edx.org/course/engineering-software-service-saas-part-1-uc-berkeleyx-cs169-1x"
-    }],
-    "display": function() {}
+    }]
   }
 }

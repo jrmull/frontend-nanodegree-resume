@@ -3,10 +3,9 @@
     "jobs": [{
       "employer": "Patriot Federal Credit Union",
       "title": "Systems Architect",
-      "location": "Chambersburg, PA",
+      "location": "800 Wayne Avenue Chambersburg PA 17201",
       "dates": "2001/06/04 - Present",
       "description": "Oversee and implement core system itegrations. Help & guide junior developers to meet their potential. Design, develop, deploy."
-    }],
-    "display": {}
+    }]
   }
 }

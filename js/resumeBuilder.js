@@ -1,10 +1,24 @@
 /*global HTMLheaderName HTMLheaderRole HTMLcontactGeneric HTMLbioPic
          HTMLwelcomeMsg HTMLskillsStart HTMLskills HTMLworkStart
          HTMLworkEmployer HTMLworkTitle HTMLworkDates HTMLworkLocation
-         HTMLworkDescription*/
+         HTMLworkDescription HTMLprojectStart HTMLprojectTitle
+         HTMLprojectDates HTMLprojectDescription HTMLprojectImage
+         HTMLschoolStart HTMLschoolName HTMLschoolDegree HTMLschoolDates
+         HTMLschoolLocation HTMLschoolMajor HTMLonlineClasses
+         HTMLonlineTitle HTMLonlineSchool HTMLonlineDates HTMLonlineURL
+         googleMap */
 /*eslint-disable no-alert, no-console */
 
-var x = 0; //used to iterate over arrays
+/* put objects read from /data into the global scope
+   these vars referenced by locationFinder in helper.js
+*/
+/* exported bio work */
+var bio = {},
+  work = {};
+
+//used to iterate over arrays
+var x = 0,
+  y = 0;
 
 var loadBio = function(bioObj) {
   /* var declarations at the top of the function for performance and scope clarity
@@ -35,8 +49,8 @@ var loadBio = function(bioObj) {
     //Contact Info
     $('#topContacts')
       .css('display', 'flex');
-    $('#footerContacts')
-      .css('display', 'flex');
+    $('#lets-connect')
+      .css('display', 'block');
 
     /* Iterate over an array of the names of keys of the contacts object.
        This is better performing than a for-in loop and obviates the need
@@ -46,8 +60,7 @@ var loadBio = function(bioObj) {
        https://jsperf.com/fastest-array-loops-in-javascript/24
      */
     for (x = 0; x < contactsKeys.length; x += 1) {
-      formattedContact = HTMLcontactGeneric.replace('%contact%',
-          contactsKeys[x])
+      formattedContact = HTMLcontactGeneric.replace('%contact%', contactsKeys[x])
         .replace('%data%', contacts[contactsKeys[x]]);
       $('#topContacts,#footerContacts')
         .append(formattedContact);
@@ -65,6 +78,8 @@ var loadBio = function(bioObj) {
         .append(formattedSkill);
     }
   }();
+
+  bio = bioObj.bio;
 };
 
 var loadWork = function(workObj) {
@@ -88,8 +103,7 @@ var loadWork = function(workObj) {
       formattedTitle = HTMLworkTitle.replace('%data%', jobs[x].title);
       formattedWorkDates = HTMLworkDates.replace('%data%', jobs[x].dates);
       formattedWorkLocation = HTMLworkLocation.replace('%data%', jobs[x].location);
-      formattedWorkDescription =
-        HTMLworkDescription.replace('%data%', jobs[x].description);
+      formattedWorkDescription = HTMLworkDescription.replace('%data%', jobs[x].description);
 
       $('#workExperience')
         .append(formattedEmployer + formattedTitle)
@@ -98,15 +112,9 @@ var loadWork = function(workObj) {
         .append(formattedWorkDescription);
     }
   }();
-};
 
-/*
-var HTMLprojectStart = '<div class="project-entry"></div>';
-var HTMLprojectTitle = '<a href="#">%data%</a>';
-var HTMLprojectDates = '<div class="date-text">%data%</div>';
-var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img src="%data%">';
-*/
+  work = workObj.work;
+};
 
 var loadProjects = function(projectsObj) {
   var projects = projectsObj.projects.projects,
@@ -115,7 +123,7 @@ var loadProjects = function(projectsObj) {
     formattedProjectDescription = '',
     formattedProjectImage = '';
 
-  projectsObj.display = function() {
+  projectsObj.projects.display = function() {
     console.log('Display projectsObj');
 
     $('#projects')
@@ -123,15 +131,10 @@ var loadProjects = function(projectsObj) {
       .prepend(HTMLprojectStart);
 
     for (x = 0; x < projects.length; x += 1) {
-      formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects[x]
-        .title);
-      formattedProjectDates = HTMLprojectDates.replace('%data%', projects[x]
-        .dates);
-      formattedProjectDescription = HTMLprojectDescription.replace('%data%',
-        projects[
-          x].description);
-      formattedProjectImage =
-        HTMLprojectImage.replace('%data%', projects[x].images);
+      formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects[x].title);
+      formattedProjectDates = HTMLprojectDates.replace('%data%', projects[x].dates);
+      formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects[x].description);
+      formattedProjectImage = HTMLprojectImage.replace('%data%', projects[x].images);
 
       $('#projects')
         .append(formattedProjectTitle)
@@ -142,12 +145,68 @@ var loadProjects = function(projectsObj) {
   }();
 };
 
+var loadEducation = function(educationObj) {
+  var schools = educationObj.education.schools,
+    onlineCourses = educationObj.education.onlineCourses,
+    formattedSchoolName = '',
+    formattedSchoolDegree = '',
+    formattedSchoolDates = '',
+    formattedSchoolLocation = '',
+    formattedSchoolMajor = '',
+    formattedOnlineTitle = '',
+    formattedOnlineSchool = '',
+    formattedOnlineDates = '',
+    formattedOnlineURL = '';
+
+  educationObj.education.display = function() {
+    console.log('Display educationObj');
+
+    $('#education')
+      .css('display', 'block')
+      .prepend(HTMLschoolStart);
+
+    for (x = 0; x < schools.length; x += 1) {
+      formattedSchoolName = HTMLschoolName.replace('%data%', schools[x].name);
+      formattedSchoolDegree = HTMLschoolDegree.replace('%data%', schools[x].degree);
+      formattedSchoolDates = HTMLschoolDates.replace('%data%', schools[x].dates);
+      formattedSchoolLocation = HTMLschoolLocation.replace('%data%', schools[x].location);
+
+      $('#education')
+        .append(formattedSchoolName)
+        .append(formattedSchoolDegree)
+        .append(formattedSchoolDates)
+        .append(formattedSchoolLocation);
+
+      for (y = 0; y < schools[x].majors.length; y += 1) {
+        formattedSchoolMajor = HTMLschoolMajor.replace('%data%', schools[x].majors[y]);
+        $('#education')
+          .append(formattedSchoolMajor);
+      }
+    }
+
+    $('#education')
+      .append(HTMLonlineClasses);
+    for (x = 0; x < onlineCourses.length; x += 1) {
+      formattedOnlineTitle = HTMLonlineTitle.replace('%data%', onlineCourses[x].title);
+      formattedOnlineSchool = HTMLonlineSchool.replace('%data%', onlineCourses[x].school);
+      formattedOnlineDates = HTMLonlineDates.replace('%data%', onlineCourses[x].date);
+      formattedOnlineURL = HTMLonlineURL.replace('%data%', onlineCourses[x].url);
+
+      $('#education')
+        .append(formattedOnlineTitle)
+        .append(formattedOnlineSchool)
+        .append(formattedOnlineDates)
+        .append(formattedOnlineURL);
+    }
+  }();
+};
+
 var logFailedRequest = function(jqxhr, textStatus, error) {
   var err = textStatus + ', ' + error;
   alert('Request Failed: ' + err);
 };
 
-var loadData = function() {
+var buildResume = function() {
   //bio
   $.getJSON('/data/bio.json', function() {
       console.log('Read bio.json');
@@ -168,6 +227,18 @@ var loadData = function() {
     })
     .fail(logFailedRequest)
     .done(loadProjects);
+
+  //education
+  $.getJSON('/data/education.json', function() {
+      console.log('Read education.json');
+    })
+    .fail(logFailedRequest)
+    .done(loadEducation);
+
+  //map
+  $('#mapDiv')
+    .css('display', 'block')
+    .append(googleMap);
 };
 
-$(loadData);
+$(buildResume);

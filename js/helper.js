@@ -96,7 +96,7 @@ function logClicks(x, y) {
 
 $(document)
   .click(function(loc) {
-    // your code goes here!
+    logClicks(loc.clientX, loc.clientY);
   });
 
 
@@ -183,7 +183,22 @@ function initializeMap() {
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!
+      if (!infoWindow.hasOwnProperty('isOpen') || infoWindow.isOpen === false) {
+        infoWindow.open(map, marker);
+        infoWindow.isOpen = true;
+      } else {
+        infoWindow.close();
+        infoWindow.isOpen = false;
+      }
+    });
+
+    /*
+    Add a listener to keep track of when the user clicks the 'X' to close an
+    infoWindow (as opposed to clicking the marker)
+    */
+    google.maps.event.addListener(infoWindow, 'closeclick', function() {
+      infoWindow.close();
+      infoWindow.isOpen = false;
     });
 
     // this is where the pin actually gets added to the map.
@@ -246,11 +261,11 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
-//Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+window.addEventListener('resize', function(e) {
+  //Make sure the map bounds get updated on page resize
+  map.fitBounds(mapBounds);
+});
