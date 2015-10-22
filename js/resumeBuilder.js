@@ -96,7 +96,7 @@ var loadWork = function(workObj) {
     //Work Experience
     $('#workExperience')
       .css('display', 'block')
-      .prepend(HTMLworkStart);
+      .append(HTMLworkStart);
 
     for (x = 0; x < jobs.length; x += 1) {
       formattedEmployer = HTMLworkEmployer.replace('%data%', jobs[x].employer);
@@ -105,7 +105,7 @@ var loadWork = function(workObj) {
       formattedWorkLocation = HTMLworkLocation.replace('%data%', jobs[x].location);
       formattedWorkDescription = HTMLworkDescription.replace('%data%', jobs[x].description);
 
-      $('#workExperience')
+      $('.work-entry:last')
         .append(formattedEmployer + formattedTitle)
         .append(formattedWorkDates)
         .append(formattedWorkLocation)
@@ -128,7 +128,7 @@ var loadProjects = function(projectsObj) {
 
     $('#projects')
       .css('display', 'block')
-      .prepend(HTMLprojectStart);
+      .append(HTMLprojectStart);
 
     for (x = 0; x < projects.length; x += 1) {
       formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects[x].title);
@@ -136,7 +136,7 @@ var loadProjects = function(projectsObj) {
       formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects[x].description);
       formattedProjectImage = HTMLprojectImage.replace('%data%', projects[x].images);
 
-      $('#projects')
+      $('.project-entry')
         .append(formattedProjectTitle)
         .append(formattedProjectDates)
         .append(formattedProjectDescription)
@@ -163,7 +163,7 @@ var loadEducation = function(educationObj) {
 
     $('#education')
       .css('display', 'block')
-      .prepend(HTMLschoolStart);
+      .append(HTMLschoolStart);
 
     for (x = 0; x < schools.length; x += 1) {
       formattedSchoolName = HTMLschoolName.replace('%data%', schools[x].name);
@@ -171,7 +171,7 @@ var loadEducation = function(educationObj) {
       formattedSchoolDates = HTMLschoolDates.replace('%data%', schools[x].dates);
       formattedSchoolLocation = HTMLschoolLocation.replace('%data%', schools[x].location);
 
-      $('#education')
+      $('.education-entry')
         .append(formattedSchoolName)
         .append(formattedSchoolDegree)
         .append(formattedSchoolDates)
@@ -179,12 +179,12 @@ var loadEducation = function(educationObj) {
 
       for (y = 0; y < schools[x].majors.length; y += 1) {
         formattedSchoolMajor = HTMLschoolMajor.replace('%data%', schools[x].majors[y]);
-        $('#education')
+        $('.education-entry')
           .append(formattedSchoolMajor);
       }
     }
 
-    $('#education')
+    $('.education-entry')
       .append(HTMLonlineClasses);
     for (x = 0; x < onlineCourses.length; x += 1) {
       formattedOnlineTitle = HTMLonlineTitle.replace('%data%', onlineCourses[x].title);
@@ -192,7 +192,7 @@ var loadEducation = function(educationObj) {
       formattedOnlineDates = HTMLonlineDates.replace('%data%', onlineCourses[x].date);
       formattedOnlineURL = HTMLonlineURL.replace('%data%', onlineCourses[x].url);
 
-      $('#education')
+      $('.education-entry')
         .append(formattedOnlineTitle)
         .append(formattedOnlineSchool)
         .append(formattedOnlineDates)
@@ -208,28 +208,28 @@ var logFailedRequest = function(jqxhr, textStatus, error) {
 
 var buildResume = function() {
   //bio
-  $.getJSON('/data/bio.json', function() {
+  $.getJSON('data/bio.json', function() {
       console.log('Read bio.json');
     })
     .fail(logFailedRequest)
     .done(loadBio);
 
   //work
-  $.getJSON('/data/work.json', function() {
+  $.getJSON('data/work.json', function() {
       console.log('Read work.json');
     })
     .fail(logFailedRequest)
     .done(loadWork);
 
   //projects
-  $.getJSON('/data/projects.json', function() {
+  $.getJSON('data/projects.json', function() {
       console.log('Read projects.json');
     })
     .fail(logFailedRequest)
     .done(loadProjects);
 
   //education
-  $.getJSON('/data/education.json', function() {
+  $.getJSON('data/education.json', function() {
       console.log('Read education.json');
     })
     .fail(logFailedRequest)
