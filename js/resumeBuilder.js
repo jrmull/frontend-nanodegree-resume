@@ -12,15 +12,11 @@
 /* put objects read from /data into the global scope
    these vars referenced by locationFinder in helper.js
 */
-/* exported bio work */
-var bio = {},
-  work = {};
+/* exported jmullResume */
+var jmullResume = jmullResume || {};
 
-//used to iterate over arrays
-var x = 0,
-  y = 0;
-
-var loadBio = function(bioObj) {
+jmullResume.
+loadBio = function(bioObj) {
   /* var declarations at the top of the function for performance and scope clarity
      var keyword important so the variable isn't defined in global scope
      https://jsperf.com/declaring-variables-inside-loops/27
@@ -39,6 +35,7 @@ var loadBio = function(bioObj) {
 
   bioObj.bio.display = function() {
     console.log('Display bioObj');
+    var x = 0;
 
     //Name & Role
     $('#header')
@@ -79,10 +76,10 @@ var loadBio = function(bioObj) {
     }
   }();
 
-  bio = bioObj.bio;
+  jmullResume.bio = bioObj.bio;
 };
 
-var loadWork = function(workObj) {
+jmullResume.loadWork = function(workObj) {
   var jobs = workObj.work.jobs,
     formattedEmployer = '',
     formattedTitle = '',
@@ -92,6 +89,7 @@ var loadWork = function(workObj) {
 
   workObj.work.display = function() {
     console.log('Display workObj');
+    var x = 0;
 
     //Work Experience
     $('#workExperience')
@@ -113,10 +111,10 @@ var loadWork = function(workObj) {
     }
   }();
 
-  work = workObj.work;
+  jmullResume.work = workObj.work;
 };
 
-var loadProjects = function(projectsObj) {
+jmullResume.loadProjects = function(projectsObj) {
   var projects = projectsObj.projects.projects,
     formattedProjectTitle = '',
     formattedProjectDates = '',
@@ -125,6 +123,7 @@ var loadProjects = function(projectsObj) {
 
   projectsObj.projects.display = function() {
     console.log('Display projectsObj');
+    var x = 0;
 
     $('#projects')
       .css('display', 'block')
@@ -145,7 +144,7 @@ var loadProjects = function(projectsObj) {
   }();
 };
 
-var loadEducation = function(educationObj) {
+jmullResume.loadEducation = function(educationObj) {
   var schools = educationObj.education.schools,
     onlineCourses = educationObj.education.onlineCourses,
     formattedSchoolName = '',
@@ -160,6 +159,8 @@ var loadEducation = function(educationObj) {
 
   educationObj.education.display = function() {
     console.log('Display educationObj');
+    var x = 0,
+      y = 0;
 
     $('#education')
       .css('display', 'block')
@@ -198,42 +199,44 @@ var loadEducation = function(educationObj) {
         .append(formattedOnlineDates)
         .append(formattedOnlineURL);
     }
+
+    jmullResume.education = educationObj.education;
   }();
 };
 
-var logFailedRequest = function(jqxhr, textStatus, error) {
+jmullResume.logFailedRequest = function(jqxhr, textStatus, error) {
   var err = textStatus + ', ' + error;
   alert('Request Failed: ' + err);
 };
 
-var buildResume = function() {
+jmullResume.buildResume = function() {
   //bio
   $.getJSON('data/bio.json', function() {
       console.log('Read bio.json');
     })
-    .fail(logFailedRequest)
-    .done(loadBio);
+    .fail(jmullResume.logFailedRequest)
+    .done(jmullResume.loadBio);
 
   //work
   $.getJSON('data/work.json', function() {
       console.log('Read work.json');
     })
-    .fail(logFailedRequest)
-    .done(loadWork);
+    .fail(jmullResume.logFailedRequest)
+    .done(jmullResume.loadWork);
 
   //projects
   $.getJSON('data/projects.json', function() {
       console.log('Read projects.json');
     })
-    .fail(logFailedRequest)
-    .done(loadProjects);
+    .fail(jmullResume.logFailedRequest)
+    .done(jmullResume.loadProjects);
 
   //education
   $.getJSON('data/education.json', function() {
       console.log('Read education.json');
     })
-    .fail(logFailedRequest)
-    .done(loadEducation);
+    .fail(jmullResume.logFailedRequest)
+    .done(jmullResume.loadEducation);
 
   //map
   $('#mapDiv')
@@ -241,4 +244,4 @@ var buildResume = function() {
     .append(googleMap);
 };
 
-$(buildResume);
+$(jmullResume.buildResume);
